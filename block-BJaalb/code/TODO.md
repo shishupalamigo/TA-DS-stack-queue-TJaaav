@@ -32,6 +32,47 @@ Methods:
 ```js
 class Stack {
   // your code goes here
+  constructor(maxSize) {
+    if (isNaN(maxSize)) {
+      maxSize = 10;
+    }
+    this.maxSize = maxSize;
+    this.container = [];
+  }
+  display() {
+    console.log(this.container);
+  }
+  length() {
+    return this.container.length;
+  }
+  isEmpty() {
+    return this.container.length === 0;
+  }
+  isFull() {
+    return this.container.length >= this.maxSize;
+  }
+  add(element) {
+    if (this.isFull()) {
+      console.log('The Stack is Full');
+      return;
+    }
+    this.container.push(element);
+    return this.container.length;
+  }
+  remove() {
+    if (this.isEmpty()) {
+      console.log('The Stack is Empty');
+      return;
+    }
+    return this.container.pop();
+  }
+  peek() {
+    if (this.isEmpty()) {
+      console.log('The Stack is Empty');
+      return;
+    }
+    return this.container[this.length() - 1];
+  }
 }
 
 // Test 1
@@ -122,6 +163,28 @@ Methods:
 ```js
 class Stack {
   // your code goes here
+  constructor(capacity) {
+    if (isNaN(capacity)) {
+      capacity = Infinity;
+    }
+    this.storage = {};
+    this.tail = 0;
+    this.head = 0;
+  }
+
+  add (element) {
+    this.storage[this.tail++] = element;
+    return this.tail;
+  };
+  remove () {
+  if (this.tail === this.head) {
+    return undefined
+  }
+
+  var element = this.storage[this.head];
+  delete element;
+  return element;
+}
 }
 
 // Test 1
