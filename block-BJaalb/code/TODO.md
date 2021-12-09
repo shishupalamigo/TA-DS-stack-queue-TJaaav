@@ -42,7 +42,7 @@ class Stack {
   display() {
     console.log(this.container);
   }
-  length() {
+   get length() {
     return this.container.length;
   }
   isEmpty() {
@@ -71,7 +71,7 @@ class Stack {
       console.log('The Stack is Empty');
       return;
     }
-    return this.container[this.length() - 1];
+    return this.container[this.container.length - 1];
   }
 }
 
@@ -167,24 +167,39 @@ class Stack {
     if (isNaN(capacity)) {
       capacity = Infinity;
     }
-    this.storage = {};
-    this.tail = 0;
-    this.head = 0;
+    this.store = {};
   }
-
-  add (element) {
-    this.storage[this.tail++] = element;
-    return this.tail;
-  };
-  remove () {
-  if (this.tail === this.head) {
-    return undefined
+  get length() {
+    return Object.keys(this.store).length;
   }
+  add(element) {
+    if (Object.keys(this.store).length >= this.capacity) {
+      alert(`Stack is overflowing`);
+      return;
+    }
+    this.store[Object.keys(this.store).length] = element;
+    return Object.keys(this.store).length;
+  }
+  remove() {
+    let index = Object.keys(this.store).length - 1;
+    let elm = this.store[index];
+    delete this.store[index];
 
-  var element = this.storage[this.head];
-  delete element;
-  return element;
-}
+    return elm;
+  }
+  peek() {
+    return this.store[Object.keys(this.store).length - 1];
+  }
+  printAll() {
+    Object.keys(this.store)
+      .sort((a, b) => a - b)
+      .forEach((key) => {
+        console.log(this.store[key]);
+      });
+  }
+  isEmpty() {
+    return Object.keys(this.store).length === 0;
+  }
 }
 
 // Test 1
